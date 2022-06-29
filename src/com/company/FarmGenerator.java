@@ -22,15 +22,19 @@ public class FarmGenerator extends Farm {
 
         System.out.println("Podaj nazwe farmy: ");
         String farmName = scanner.nextLine();
-        double sizeInHA = rand.nextInt(10)+1;
-        int buildingCount = rand.nextInt(4)+1;
+
+        // rozmiar od 2 do 12 HA
+        double sizeInHA = rand.nextInt(10)+2;
+
+        // ilosc budynkow miedzy 1 a 3
+        int buildingCount = rand.nextInt(2)+1;
+
+        // kalkulator ceny budynku
         double price = sizeInHA * 500 + buildingCount * 1000;
 
         Farm farmGen = new Farm(farmName, sizeInHA, buildingCount, price);
         farms.add(farmGen);
-
     }
-
 
     public static void displayFarms(){
         for (Farm farm: farms){

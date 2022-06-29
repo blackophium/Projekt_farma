@@ -1,4 +1,4 @@
-package com.company;
+package com.company.notInUsageNow;
 
 public class Animal {
     private String name;
@@ -13,7 +13,6 @@ public class Animal {
     public double chanceToReproduce;
 
     public Animal(String name, double buyPrice, double growInAWeek, int weeksUntilAdult, String acceptableFood, int weight, int ageInWeeks, boolean flagIsYoung, boolean flagAbleToSell, double chanceToReproduce) {
-
         this.name = name;
         this.buyPrice = buyPrice;
         this.growInAWeek = growInAWeek;

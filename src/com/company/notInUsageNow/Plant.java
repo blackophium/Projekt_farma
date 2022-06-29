@@ -1,4 +1,4 @@
-package com.company;
+package com.company.notInUsageNow;
 
 public class Plant {
     private String name;
