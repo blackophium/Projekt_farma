@@ -24,6 +24,36 @@ public class gameStatus {
         this.shouldContinue = shouldContinue;
     }
 
+    public void displayGameStatus(){
+        System.out.println("***** STAN ROZGRYWKI: Farma " + farmName + " *****");
+        System.out.println("Aktualnie trwa: " + weekCounter + " tydzien rozgrywki.");
+        System.out.println("Masz: " + userWallet + " monet do wykorzystania.");
+        System.out.println("Twoja farma ma: " + sizeInHA + " HA powierzchni.");
+        System.out.println("Masz do dyspozycji: " + freeAreaInHA + " HA ziemii.");
+        System.out.println("Dysponujesz: " + buildingCount + " budynkami, " + animalSpeciesCount + " zwierzetami, oraz " + plantSpeciesCount + " roslinami.");
+
+    }
+
+    public void startNewRound(){
+    // metoda inkrementująca lub dekrementująca różne parametry po starcie nowej rundy
+
+        // zwiększa się tydzień o jeden
+        weekCounter = weekCounter + 1;
+        // otrzymujemy mały bonusik finansowy (inspiracja grą Heroes III)
+        userWallet = userWallet + 100;
+
+        // rzeczy dziejące się ze zwierzętami
+
+        // rzeczy dziejące się z roślinami
+
+    }
+
+    // zakonczenie gry - odpowiednik exitu
+    public void finishTheGame(){
+        System.out.println("Dziekuje za gre! Do zobaczenia nastepnym razem!");
+        shouldContinue = false;
+    }
+
     // getter wyrzucający numer rundy (tygodnia)
     public int getWeekCounter() {
     return weekCounter;

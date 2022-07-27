@@ -18,6 +18,17 @@ public class Main {
         newGame.plantSpeciesCount = 0;
         newGame.shouldContinue = true;
 
+        // podstawowe budynki
+        Building House = new Building("Dom", 4000.0, 0.01);
+        Building Barn = new Building("Stodola", 2000.0, 0.5);
+        Building Enclosure = new Building("Wybieg", 5000.0, 2);
+        Building Chillzone = new Building("Strefa chillu", 900.0, 0.5);
+        Building Chapel = new Building("Kapliczka", 300.0, 0.01);
+
+        // robocze kontrolery stanu przypisania rozmiaru ziemii do budynkow i rozdysponowania budynkow z generatora
+        int firstBuildingCounter = newGame.buildingCount;
+        newGame.freeAreaInHA = newGame.sizeInHA;
+
 
         System.out.println("Witaj w symulatorze farmy! Aby rozpoczac nowa gre podaj swoje imie...");
         String playerName = scanner.nextLine();
@@ -85,26 +96,15 @@ public class Main {
         System.out.println("Wstepna konfiguracja jest juz prawie gotowa!");
         System.out.println(" ");
 
-        // test zapisu stanu początkowego
-        System.out.println("Test zapisu:");
-         System.out.println(newGame.sizeInHA);
-         System.out.println(newGame.buildingCount);
-         System.out.println(newGame.userWallet);
+//        //test zapisu stanu początkowego
+//        System.out.println("Test zapisu:");
+//        System.out.println(newGame.sizeInHA);
+//        System.out.println(newGame.buildingCount);
+//        System.out.println(newGame.userWallet);
 
         System.out.println("Masz do dyspozycji: " + newGame.buildingCount + " budynki i " + newGame.userWallet + " monet.");
         System.out.println("Najwyzszy czas okreslic ich przeznaczenie i kupic wyposazenie.");
         System.out.println("W sklepie dostepne jest kilka wariantow wyposazenia. Dokonaj wyboru!");
-
-        // roboczo tworze sobie jakies budynki zeby rozdysponowac ta wygenerowana ilosc przed przejsciem do glownego menu
-        Building House = new Building("Dom", 4000.0, 0.01);
-        Building Barn = new Building("Stodola", 2000.0, 0.5);
-        Building Enclosure = new Building("Wybieg", 5000.0, 2);
-        Building Chillzone = new Building("Strefa chillu", 900.0, 0.5);
-        Building Chapel = new Building("Kapliczka", 300.0, 0.01);
-
-        // robocze kontrolery stanu przypisania rozmiaru ziemii do budynkow i rozdysponowania budynkow z generatora
-        int firstBuildingCounter = newGame.buildingCount;
-        newGame.freeAreaInHA = newGame.sizeInHA;
 
 
         while (firstBuildingCounter > 0) {
@@ -121,6 +121,9 @@ public class Main {
                 // oraz dodaje wybrane budynki do listy budynków uzytkownika
                 // na koniec pętli userowi zostaje 0 budynkow do rozdysponowania i dzieki temu mozemy rozpoczac wlasciwa rozgrywke
 
+
+
+                // **** KUPOWANIE PIERWSZYCH BUDYNKOW **** //
                 System.out.println("Podaj numer budynku ktory wybierasz do zakupu:");
                 int buildingUserChoice = scanner.nextInt();
                 switch (buildingUserChoice) {
@@ -192,26 +195,27 @@ public class Main {
         // *** MENU GLOWNE *** //
         while (newGame.shouldContinue) {
             System.out.println(":::::MENU GLOWNE::::");
-            System.out.println("1. Wyswietl stan gry.");
-            System.out.println("2. Kup lub sprzedaj ziemie uprawna.");      // dziala
-            System.out.println("3. Kup lub sprzedaj budynek.");
-            System.out.println("4. Kup zwierze lub roślinę.");
-            System.out.println("5. Sprzedaj zwierze lub rosline.");
-            System.out.println("6. Posadz rosliny.");
-            System.out.println("7. Zbierz plony.");
-            System.out.println("8. Wyswietl stan zapasow.");
-            System.out.println("9. Wyswietl informacje o zwierzetach.");
-            System.out.println("10. Wyswietl informacje o roslinach. ");
-            System.out.println("11. Rozpocznij nowa runde. ");
-            System.out.println("12. Zakoncz gre. ");
+            System.out.println("1. Wyswietl stan gry.");                    // do przetestowania
+            System.out.println("2. Kup lub sprzedaj ziemie uprawna.");      // to dziala
+            System.out.println("3. Kup lub sprzedaj budynek.");             // do przetestowania
+            System.out.println("4. Kup lub sprzedaj rosline.");             //
+            System.out.println("5. Kup lub sprzedaj zwierze.");             //
+            System.out.println("6. Posadz rosliny.");                       //
+            System.out.println("7. Zbierz plony.");                         //
+            System.out.println("8. Wyswietl stan zapasow.");                //
+            System.out.println("9. Wyswietl informacje o zwierzetach.");    //
+            System.out.println("10. Wyswietl informacje o roslinach. ");    //
+            System.out.println("11. Rozpocznij nowa runde. ");              //
+            System.out.println("12. Zakoncz gre. ");                        //
 
             int gameUserChoice = scanner.nextInt();
 
             switch(gameUserChoice){
+                // *** STAN GRY *** //
                 case 1:
-                     //gameStatus.printGameStatus();
+                     newGame.displayGameStatus();
                     break;
-                // *** KUPNO/SPRZEDAZ ZIEMII UPRAWNEJ ***
+                // *** KUPNO/SPRZEDAZ ZIEMII UPRAWNEJ *** //
                 case 2:
                     System.out.println("Aby kupic ziemie wpisz: 1, aby sprzedac wpisz: 2.");
                     int buyOrSellArea = scanner.nextInt();
@@ -222,6 +226,7 @@ public class Main {
                             } else {
                                 System.out.println("Wybrano bledne polecenie. Nastapi powrot do menu glownego.");
                             }
+                // *** KUPNO/SPRZEDAZ BUDYNKOW *** //
                 case 3:
                     System.out.println("Aby kupic budynek wpisz: 1, aby sprzedac wpisz: 2.");
                     int buyOrSellBuilding = scanner.nextInt();
@@ -233,34 +238,34 @@ public class Main {
                             System.out.println("Wybrano bledne polecenie. Nastapi powrot do menu glownego.");
                         }
                     break;
-
-                case 4:
-                    // method
-                    break;
-                case 5:
-                    // method
-                    break;
-                case 6:
-                    // method
-                    break;
-                case 7:
-                    // method
-                    break;
-                case 8:
-                    // method
-                    break;
-                case 9:
-                    // method
-                    break;
-                case 10:
-                    // method
-                    break;
-                case 11:
-                    // method
-                    break;
-                case 12:
-                    // method
-                    break;
+                // *** KUPNO/SPRZEDAZ ROSLIN *** //
+//                case 4:
+//                    // method
+//                    break;
+//                case 5:
+//                    // method
+//                    break;
+//                case 6:
+//                    // method
+//                    break;
+//                case 7:
+//                    // method
+//                    break;
+//                case 8:
+//                    // method
+//                    break;
+//                case 9:
+//                    // method
+//                    break;
+//                case 10:
+//                    // method
+//                    break;
+//                case 11:
+//                    newGame.startNewRound();
+//                    break;
+//                case 12:
+//                    newGame.finishTheGame();
+//                    break;
 
 
             }
