@@ -8,14 +8,30 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // parametry podstawowe
+// ******************************************************************** KONFIGURACJA PODSTAWOWA ***********************************************************************************
+
         Scanner scanner = new Scanner(System.in);
+
         gameStatus newGame = new gameStatus();
+        // data i pieniazki
         newGame.weekCounter = 0;
         newGame.userWallet = 10000.0;
+        // budynki i teren
         newGame.buildingCount = 0;
+        newGame.freeAreaInHA = 0;
+        // ziarno
+        newGame.seedPszenicaCounter = 0;
+        newGame.seedOwiesCounter = 0;
+        newGame.seedSlonecznikCounter = 0;
+        newGame.seedMarchewCounter = 0;
+        newGame.seedZiemniakCounter = 0;
+
+        // rosliny
+
+        // zwierzeta
         newGame.animalSpeciesCount = 0;
-        newGame.plantSpeciesCount = 0;
+
+        // stan gry
         newGame.shouldContinue = true;
 
         // podstawowe budynki
@@ -29,14 +45,11 @@ public class Main {
         int firstBuildingCounter = newGame.buildingCount;
         newGame.freeAreaInHA = newGame.sizeInHA;
 
-
         System.out.println("Witaj w symulatorze farmy! Aby rozpoczac nowa gre podaj swoje imie...");
         String playerName = scanner.nextLine();
         System.out.println("Czesc " + playerName + " za chwile rozpocznie sie Twoja przygoda na wsi!");
 
-
         // generujemy farmy do wyboru
-
         System.out.println("Na start prosze abys wygenerowal sobie 5 farm. W tym celu wprowadz ich nazwy:");
 
         for (int i = 1; i < 6; i++) {
@@ -48,14 +61,13 @@ public class Main {
         FarmGenerator.displayFarms();
 
         // wybór farmy przez użytkownika
-
         System.out.println("Prosze wybierz jedna z wygenerowanych farm by przejsc dalej. W tym celu wpisz numer wyboru:");
         int farmUserChoice = scanner.nextInt();
 
         // do parametrów początkowych gry przypisuję parametry wybranej farmy
         // gra zabezpieczona jest tak, że na poczatku zawsze stac nas na kazdy z wyborow, bo pozniej juz nie zmieniamy farmy tylko rozbudowujemy ją
-        switch (farmUserChoice) {
 
+        switch (farmUserChoice) {
             case 1:
                 System.out.println(FarmGenerator.farms.get(0));
                 newGame.farmName = FarmGenerator.farms.get(0).farmName;
@@ -102,10 +114,11 @@ public class Main {
 //        System.out.println(newGame.buildingCount);
 //        System.out.println(newGame.userWallet);
 
+
+        // wybieramy przeznaczenie podstawowych wygenerowanych budynkow - pozniej bedzie mozna dokupic
         System.out.println("Masz do dyspozycji: " + newGame.buildingCount + " budynki i " + newGame.userWallet + " monet.");
         System.out.println("Najwyzszy czas okreslic ich przeznaczenie i kupic wyposazenie.");
         System.out.println("W sklepie dostepne jest kilka wariantow wyposazenia. Dokonaj wyboru!");
-
 
         while (firstBuildingCounter > 0) {
             if (newGame.userWallet != 0 && newGame.sizeInHA != 0) {
@@ -116,12 +129,9 @@ public class Main {
                 System.out.println("4. " + Chillzone.name + ", cena: " + Chillzone.price + ", powierzchnia: " + Chillzone.sizeInHa + " HA");
                 System.out.println("5. " + Chapel.name + ", cena: " + Chapel.price + ", powierzchnia: " + Chapel.sizeInHa + " HA");
 
-
                 // mechanizm wyboru przeznaczenia podstawowych budynków z generatora - aktualizuje "wielkość" dostępnej wolnej ziemii
                 // oraz dodaje wybrane budynki do listy budynków uzytkownika
                 // na koniec pętli userowi zostaje 0 budynkow do rozdysponowania i dzieki temu mozemy rozpoczac wlasciwa rozgrywke
-
-
 
                 // **** KUPOWANIE PIERWSZYCH BUDYNKOW **** //
                 System.out.println("Podaj numer budynku ktory wybierasz do zakupu:");
@@ -189,16 +199,19 @@ public class Main {
         // okreslona ilosc wolnej ziemii na dzialce, ma okreslona ilosc budynkow o okreslonym przeznaczeniu
         // jego stan finansowy przyjal jakas wartosc, wiec mamy poczatkowy stan rozgrywki
         // zaczynamy od tygodnia nr 1
+
         System.out.println("Wykorzystales juz wszystkie dostepne na poczatku gry budynki.");
         System.out.println("Zaczynamy rozgrywke!!!");
+
+// ******************************************************************** LET THE GAME BEGIN! *************************************************************************************
 
         // *** MENU GLOWNE *** //
         while (newGame.shouldContinue) {
             System.out.println(":::::MENU GLOWNE::::");
-            System.out.println("1. Wyswietl stan gry.");                    // do przetestowania
-            System.out.println("2. Kup lub sprzedaj ziemie uprawna.");      // to dziala
-            System.out.println("3. Kup lub sprzedaj budynek.");             // do przetestowania
-            System.out.println("4. Kup lub sprzedaj rosline.");             //
+            System.out.println("1. Wyswietl stan gry.");                    // done
+            System.out.println("2. Kup lub sprzedaj ziemie uprawna.");      // done
+            System.out.println("3. Kup lub sprzedaj budynek.");             // done
+            System.out.println("4. Kup lub sprzedaj nasiona.");             // done
             System.out.println("5. Kup lub sprzedaj zwierze.");             //
             System.out.println("6. Posadz rosliny.");                       //
             System.out.println("7. Zbierz plony.");                         //
@@ -211,7 +224,6 @@ public class Main {
             int gameUserChoice = scanner.nextInt();
 
             switch(gameUserChoice){
-                // *** STAN GRY *** //
                 case 1:
                      newGame.displayGameStatus();
                     break;
@@ -238,10 +250,10 @@ public class Main {
                             System.out.println("Wybrano bledne polecenie. Nastapi powrot do menu glownego.");
                         }
                     break;
-                // *** KUPNO/SPRZEDAZ ROSLIN *** //
-//                case 4:
-//                    // method
-//                    break;
+                // *** KUPNO/SPRZEDAZ NASION *** //
+                case 4:
+                    // method
+                    break;
 //                case 5:
 //                    // method
 //                    break;

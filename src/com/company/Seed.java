@@ -21,7 +21,7 @@ public class Seed implements Buyable, Saleable {
         this.costOfCollect = costOfCollect;
     }
 
-    // metoda do wyswietlania - format
+    // metoda do wyswietlania ziarna z parametrami w formie listy
     public void displaySeedsInfo() {
         System.out.println("Nazwa rosliny: " + plantName);
         System.out.println("Cena: " + seedPrice);
@@ -31,7 +31,7 @@ public class Seed implements Buyable, Saleable {
         System.out.println("Koszt zebrania/HA: " + costOfCollect);
     }
 
-    // metoda do wyswietlania - lista
+    // metoda do wyswietlania ziaren z parametrami - lista
     public static void displaySeeds() {
         for (Seed seed : userSeeds) {
             seed.displaySeedsInfo();
@@ -57,7 +57,7 @@ public class Seed implements Buyable, Saleable {
 
     static Scanner scanner = new Scanner(System.in);
 
-    // kupno ziarna z wyswietleniem statusu
+// kupno ziarna z wyswietleniem statusu
     public static void buy(gameStatus game) {
         System.out.println("Masz do dyspozycji: " + game.userWallet + "monet.");
         System.out.println("Jesli chcesz kupic sadzonki wybierz 1.");
@@ -83,46 +83,115 @@ public class Seed implements Buyable, Saleable {
 
             // wybor powoduje zwiekszenie liczby ziaren na liscie i zmniejszenie ilosci gotowki
             if (decision == 1){
-                System.out.println("Podaj ilosc:");
+                System.out.println("Podaj ilosc pszenicy:");
                 int seedAmount = scanner.nextInt();
                 // czy usera na to stac?
                 if(game.userWallet > Pszenica.seedPrice * seedAmount) {
-                    userSeeds.set(2, Pszenica).howManySeeds =+ seedAmount;
+                    userSeeds.set(2, Pszenica).howManySeeds += seedAmount;
                     game.userWallet = game.userWallet - Pszenica.seedPrice * seedAmount;
+                    game.seedPszenicaCounter += seedAmount;
                 } else System.out.println("Niestety nie stac Cie na to.");
             }
             else if (decision == 2){
-                System.out.println("Podaj ilosc:");
+                System.out.println("Podaj ilosc owsu:");
                 int seedAmount = scanner.nextInt();
                 if(game.userWallet > Owies.seedPrice * seedAmount) {
-                    userSeeds.set(2, Owies).howManySeeds =+ seedAmount;
+                    userSeeds.set(2, Owies).howManySeeds += seedAmount;
                     game.userWallet = game.userWallet - Owies.seedPrice * seedAmount;
+                    game.seedOwiesCounter += seedAmount;
                 } else System.out.println("Niestety nie stac Cie na to.");
             }
             else if (decision == 3) {
-                System.out.println("Podaj ilosc:");
+                System.out.println("Podaj ilosc slonecznika:");
                 int seedAmount = scanner.nextInt();
                 if(game.userWallet > Slonecznik.seedPrice * seedAmount) {
-                    userSeeds.set(2, Slonecznik).howManySeeds = +seedAmount;
+                    userSeeds.set(2, Slonecznik).howManySeeds += seedAmount;
                     game.userWallet = game.userWallet - Slonecznik.seedPrice * seedAmount;
+                    game.seedSlonecznikCounter += seedAmount;
                 } else System.out.println("Niestety nie stac Cie na to.");
             }
             else if (decision == 4){
-                System.out.println("Podaj ilosc:");
+                System.out.println("Podaj ilosc marchwi:");
                 int seedAmount = scanner.nextInt();
                 if(game.userWallet > Marchew.seedPrice * seedAmount) {
-                    userSeeds.set(2, Marchew).howManySeeds = +seedAmount;
+                    userSeeds.set(2, Marchew).howManySeeds += seedAmount;
                     game.userWallet = game.userWallet - Marchew.seedPrice * seedAmount;
+                    game.seedMarchewCounter += seedAmount;
                 } else System.out.println("Niestety nie stac Cie na to.");
             }
             else if (decision == 5){
-                System.out.println("Podaj ilosc:");
+                System.out.println("Podaj ilosc ziemniaka:");
                 int seedAmount = scanner.nextInt();
                 if(game.userWallet > Ziemniak.seedPrice * seedAmount) {
-                    userSeeds.set(2, Ziemniak).howManySeeds =+ seedAmount;
+                    userSeeds.set(2, Ziemniak).howManySeeds += seedAmount;
                     game.userWallet = game.userWallet - Ziemniak.seedPrice * seedAmount;
+                    game.seedZiemniakCounter += seedAmount;
                 } else System.out.println("Niestety nie stac Cie na to.");
             }  else System.out.println("Wroc nastepnym razem!");
         }
     }
+
+public static void sell(gameStatus game){
+    System.out.println("Jesli chcesz sprzedac nasiona wybierz 1.");
+    int userChoice = scanner.nextInt();
+
+    if(userChoice == 1) {
+        System.out.println("Wybierz jakie nasiona chcesz sprzedac (podaj odpowiadajacy numer):");
+        game.displaySeedsStatus();
+
+        // sprzedaz konkretnej ilosci nasion wg decyzji usera
+        int sellDecision = scanner.nextInt();
+
+        if(sellDecision == 1 && game.seedPszenicaCounter > 0){
+            System.out.println("Ile nasion chcesz sprzedac?");
+            int seedAmount = scanner.nextInt();
+            if(seedAmount <= game.seedPszenicaCounter){
+                userSeeds.set(2, Pszenica).howManySeeds -= seedAmount;
+                game.seedPszenicaCounter -= seedAmount;
+                game.userWallet += seedAmount * Pszenica.seedPrice;
+            }
+        } else System.out.println("Nie masz tylu nasion!");
+
+        if(sellDecision == 2 && game.seedOwiesCounter > 0){
+            System.out.println("Ile nasion chcesz sprzedac?");
+            int seedAmount = scanner.nextInt();
+            if(seedAmount <= game.seedOwiesCounter){
+                userSeeds.set(2, Owies).howManySeeds -= seedAmount;
+                game.seedOwiesCounter -= seedAmount;
+                game.userWallet += seedAmount * Owies.seedPrice;
+            }
+        } else System.out.println("Nie masz tylu nasion!");
+
+        if(sellDecision == 3 && game.seedSlonecznikCounter > 0){
+            System.out.println("Ile nasion chcesz sprzedac?");
+            int seedAmount = scanner.nextInt();
+            if(seedAmount <= game.seedSlonecznikCounter){
+                userSeeds.set(2, Slonecznik).howManySeeds -= seedAmount;
+                game.seedSlonecznikCounter -= seedAmount;
+                game.userWallet += seedAmount * Slonecznik.seedPrice;
+            }
+        } else System.out.println("Nie masz tylu nasion!");
+
+        if(sellDecision == 4 && game.seedMarchewCounter > 0){
+            System.out.println("Ile sadzonek chcesz sprzedac?");
+            int seedAmount = scanner.nextInt();
+            if(seedAmount <= game.seedMarchewCounter){
+                userSeeds.set(2, Marchew).howManySeeds -= seedAmount;
+                game.seedMarchewCounter -= seedAmount;
+                game.userWallet += seedAmount * Marchew.seedPrice;
+            }
+        } else System.out.println("Nie masz tylu sadzonek!");
+
+        if(sellDecision == 5 && game.seedZiemniakCounter > 0){
+            System.out.println("Ile nasion chcesz sprzedac?");
+            int seedAmount = scanner.nextInt();
+            if(seedAmount <= game.seedZiemniakCounter){
+                userSeeds.set(2, Ziemniak).howManySeeds -= seedAmount;
+                game.seedZiemniakCounter -= seedAmount;
+                game.userWallet += seedAmount * Ziemniak.seedPrice;
+            }
+        } else System.out.println("Nie masz tylu nasion!");
+
+    } else System.out.println("Wroc prosze nastepny razem!");
+}
 }
