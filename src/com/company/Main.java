@@ -232,9 +232,9 @@ public class Main {
                     System.out.println("Aby kupic ziemie wpisz: 1, aby sprzedac wpisz: 2.");
                     int buyOrSellArea = scanner.nextInt();
                             if(buyOrSellArea == 1) {
-                                teritory.buy(newGame);
+                                Teritory.buy(newGame);
                             } else if(buyOrSellArea == 2) {
-                                teritory.sell(newGame);
+                                Teritory.sell(newGame);
                             } else {
                                 System.out.println("Wybrano bledne polecenie. Nastapi powrot do menu glownego.");
                             }
@@ -252,11 +252,19 @@ public class Main {
                     break;
                 // *** KUPNO/SPRZEDAZ NASION *** //
                 case 4:
-                    // method
+                    System.out.println("Aby kupic ziarno/sadzonki wpisz: 1, aby sprzedac wpisz: 2.");
+                    int buyOrSellSeeds = scanner.nextInt();
+                    if(buyOrSellSeeds == 1) {
+                        Seed.buy(newGame);
+                    } else if(buyOrSellSeeds == 2) {
+                        Seed.sell(newGame);
+                    } else {
+                        System.out.println("Wybrano bledne polecenie. Nastapi powrot do menu glownego.");
+                    }
                     break;
-//                case 5:
+                case 5:
 //                    // method
-//                    break;
+                    break;
 //                case 6:
 //                    // method
 //                    break;
@@ -282,7 +290,6 @@ public class Main {
 
             }
         }
-
     }
 }
 

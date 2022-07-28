@@ -1,13 +1,11 @@
 package com.company;
 
-import jdk.swing.interop.SwingInterOpUtils;
-
 import java.util.*;
 import java.util.Random;
 import java.util.Scanner;
 import static java.lang.Math.round;
 
-public class Building implements Buyable, Saleable {
+public class Building implements Buyable, Sellable {
     public String name;
     public double price;
     public double sizeInHa;
@@ -18,16 +16,20 @@ public class Building implements Buyable, Saleable {
         this.sizeInHa = sizeInHa;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public String getName() {
-        return name;
-    }
 
     // lista do gromadzenia budynkow usera
     public static List<Building> userBuildings = new ArrayList<>();
+
+    // zestaw budynkow do kupna
+    static Building House = new Building("Dom", 4000.0, 0.01);
+    static Building Barn = new Building("Stodola", 2000.0, 0.5);
+    static Building Enclosure = new Building("Wybieg", 5000.0, 2);
+    static Building Chillzone = new Building("Strefa chillu", 900.0, 0.5);
+    static Building Chapel = new Building("Kapliczka", 300.0, 0.01);
+    static Building Well = new Building("Studnia", 800.0, 0.01);
+
+    static Scanner scanner = new Scanner(System.in);
+    static Random random = new Random();
 
     // metody do wyswietlania - format
     public void displayBuildingInfo() {
@@ -44,16 +46,8 @@ public class Building implements Buyable, Saleable {
         }
     }
 
-    static Building House = new Building("Dom", 4000.0, 0.01);
-    static Building Barn = new Building("Stodola", 2000.0, 0.5);
-    static Building Enclosure = new Building("Wybieg", 5000.0, 2);
-    static Building Chillzone = new Building("Strefa chillu", 900.0, 0.5);
-    static Building Chapel = new Building("Kapliczka", 300.0, 0.01);
-    static Building Well = new Building("Studnia", 800.0, 0.01);
 
-    static Scanner scanner = new Scanner(System.in);
-    static Random random = new Random();
-
+    // metoda kupna
     public static void buy(gameStatus game) {
         System.out.println("W tej chwili posiadasz: " + game.buildingCount + " budynkow.");
         System.out.println("Masz do dyspozycji: " + game.userWallet + "monet.");
@@ -136,6 +130,8 @@ public class Building implements Buyable, Saleable {
             System.out.println("Wroc prosze nastepnym razem!");
         }}
     }
+
+    // metoda sprzedaży
     public static void sell(gameStatus game) {
         if(game.buildingCount > 0) {
             System.out.println("Witaj, widze ze chcesz sprzedac ktorys ze swoich budynkow!");
@@ -174,7 +170,17 @@ public class Building implements Buyable, Saleable {
             System.out.println("Niestety nie posiadasz zadnych budynkow.");
         }
     }
-    
+
+
+// *** GETTERY ***
+
+    public double getPrice() {
+        return price;
+    }
+
+    public String getName() {
+        return name;
+    }
     
 }
 

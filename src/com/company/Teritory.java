@@ -5,11 +5,11 @@ import java.util.Scanner;
 import static java.lang.Math.round;
 
 
-public class teritory implements Saleable, Buyable {
+public class Teritory implements Sellable, Buyable {
     public double teritorySize;
     public static double price;
 
-    public teritory(double teritorySize, double price) {
+    public Teritory(double teritorySize, double price) {
         this.teritorySize = teritorySize;
         this.price = price;
     }

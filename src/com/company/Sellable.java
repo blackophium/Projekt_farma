@@ -1,6 +1,6 @@
 package com.company;
 
-public interface Saleable {
+public interface Sellable {
     static void sell(gameStatus game){
 
     };

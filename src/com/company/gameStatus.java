@@ -19,6 +19,12 @@ public class gameStatus {
     public int seedSlonecznikCounter;
     public int seedMarchewCounter;
     public int seedZiemniakCounter;
+    //rosliny
+    public int plantPszenicaCounter;
+    public int plantOwiesCounter;
+    public int plantSlonecznikCounter;
+    public int plantMarchewCounter;
+    public int plantZiemniakCounter;
     // zwierzeta
     public int animalSpeciesCount;
     public boolean shouldContinue;
@@ -39,6 +45,13 @@ public class gameStatus {
         this.seedSlonecznikCounter = seedSlonecznikCounter;
         this.seedMarchewCounter = seedMarchewCounter;
         this.seedZiemniakCounter = seedZiemniakCounter;
+
+        // rosliny
+        this.plantPszenicaCounter = plantPszenicaCounter;
+        this.plantOwiesCounter = plantOwiesCounter;
+        this.plantSlonecznikCounter = plantSlonecznikCounter;
+        this.plantMarchewCounter = plantMarchewCounter;
+        this.plantZiemniakCounter = plantZiemniakCounter;
 
         // zwierzeta
         this.animalSpeciesCount = animalSpeciesCount;
@@ -79,6 +92,17 @@ public class gameStatus {
         System.out.println("5. Ziemniak: " + seedZiemniakCounter + " szt.");
     }
 
+    // status roslin
+/*    public void displaySeedsStatus() {
+        System.out.println("Oto zgromadzone przez Ciebie nasiona i sadzonki:");
+        System.out.println("1. Pszenica: " + seedPszenicaCounter + " szt.");
+        System.out.println("2. Owies: " + seedOwiesCounter + " szt.");
+        System.out.println("3. Slonecznik: " + seedSlonecznikCounter + " szt.");
+        System.out.println("4. Marchew: " + seedMarchewCounter + " szt.");
+        System.out.println("5. Ziemniak: " + seedZiemniakCounter + " szt.");
+    }*/
+
+
 
 
     // zakonczenie gry - odpowiednik exitu - niestety nie ma zapisu :(
@@ -86,7 +110,6 @@ public class gameStatus {
         System.out.println("Dziekuje za gre! Do zobaczenia nastepnym razem!");
         shouldContinue = false;
     }
-
 
 
 // *** GETTERY ***
