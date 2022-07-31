@@ -1,24 +1,27 @@
 package com.company;
 
+import static com.company.Building.Well;
+
 // deklaracje zmiennych związanych ze stanem bieżącej rozgrywki
+@SuppressWarnings("AccessStaticViaInstance")
 public class gameStatus {
     // basic
     public String farmName;
     public double sizeInHA;
     // teritory
-    public double freeAreaInHA;
+    public static double freeAreaInHA;
     // licznik rund
     public int weekCounter;
     // licznik portfela
-    public double userWallet;
+    public static double userWallet;
     // licznik budynków ogółem
     public int buildingCount;
     // liczniki ziarna
-    public int seedPszenicaCounter;
-    public int seedOwiesCounter;
-    public int seedSlonecznikCounter;
-    public int seedMarchewCounter;
-    public int seedZiemniakCounter;
+    public static int seedPszenicaCounter;
+    public static int seedOwiesCounter;
+    public static int seedSlonecznikCounter;
+    public static int seedMarchewCounter;
+    public static int seedZiemniakCounter;
     //rosliny
     public int plantPszenicaCounter;
     public int plantOwiesCounter;
@@ -27,6 +30,10 @@ public class gameStatus {
     public int plantZiemniakCounter;
     // zwierzeta
     public int animalSpeciesCount;
+
+    // inne
+    public int waterLitres;
+    public int fertilizerInLitres;
     public boolean shouldContinue;
 
     public gameStatus() {
@@ -56,6 +63,8 @@ public class gameStatus {
         // zwierzeta
         this.animalSpeciesCount = animalSpeciesCount;
 
+        this.waterLitres = waterLitres;
+        this.fertilizerInLitres = fertilizerInLitres;
         this.shouldContinue = shouldContinue;
     }
 
@@ -68,7 +77,9 @@ public class gameStatus {
         userWallet = userWallet + 100;
 
         // rzeczy dziejące się ze zwierzętami
+
         // rzeczy dziejące się z roślinami
+
 
     }
 
@@ -102,8 +113,21 @@ public class gameStatus {
         System.out.println("5. Ziemniak: " + seedZiemniakCounter + " szt.");
     }*/
 
+    // pobierz wode ze studni
+    public void takeWaterFromWell(){
+        if(Building.userBuildings.contains(Well)){
+        waterLitres += 1;
+        System.out.println("Pobrales 1 litr wody ze studni");}
+        else System.out.println("Nie masz studni! Najpierw wybuduj studnie!");
+    }
 
-
+    // kup nawoz
+    public void buyFertilizer(){
+        if (userWallet >= 10) {
+            userWallet -= 10;
+            System.out.println("Kupiles 1 litr nawozu.");
+        } else System.out.println("Niestety w tej chwili nie stac Cie na zakup");
+    }
 
     // zakonczenie gry - odpowiednik exitu - niestety nie ma zapisu :(
     public void finishTheGame(){

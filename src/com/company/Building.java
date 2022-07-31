@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.Scanner;
 import static java.lang.Math.round;
 
+@SuppressWarnings("ALL")
 public class Building implements Buyable, Sellable {
     public String name;
     public double price;
@@ -15,7 +16,6 @@ public class Building implements Buyable, Sellable {
         this.price = price;
         this.sizeInHa = sizeInHa;
     }
-
 
     // lista do gromadzenia budynkow usera
     public static List<Building> userBuildings = new ArrayList<>();

@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 
 
+@SuppressWarnings("AccessStaticViaInstance")
 public class Main {
 
     public static void main(String[] args) {
@@ -20,6 +21,7 @@ public class Main {
         newGame.buildingCount = 0;
         newGame.freeAreaInHA = 0;
         // ziarno
+        Seed.createListOfSeeds();
         newGame.seedPszenicaCounter = 0;
         newGame.seedOwiesCounter = 0;
         newGame.seedSlonecznikCounter = 0;
@@ -27,9 +29,14 @@ public class Main {
         newGame.seedZiemniakCounter = 0;
 
         // rosliny
+        //Plant.createListOfPlants();
 
         // zwierzeta
         newGame.animalSpeciesCount = 0;
+
+        // woda i nawoz
+        newGame.waterLitres = 0;
+        newGame.fertilizerInLitres = 0;
 
         // stan gry
         newGame.shouldContinue = true;
@@ -213,13 +220,15 @@ public class Main {
             System.out.println("3. Kup lub sprzedaj budynek.");             // done
             System.out.println("4. Kup lub sprzedaj nasiona.");             // done
             System.out.println("5. Kup lub sprzedaj zwierze.");             //
-            System.out.println("6. Posadz rosliny.");                       //
-            System.out.println("7. Zbierz plony.");                         //
-            System.out.println("8. Wyswietl stan zapasow.");                //
-            System.out.println("9. Wyswietl informacje o zwierzetach.");    //
-            System.out.println("10. Wyswietl informacje o roslinach. ");    //
-            System.out.println("11. Rozpocznij nowa runde. ");              //
-            System.out.println("12. Zakoncz gre. ");                        //
+            System.out.println("6. Pobierz wode ze studni");                // done
+            System.out.println("7. Kup nawóz");                             // done
+            System.out.println("8. Posadz rosliny.");                       //
+            System.out.println("9. Zbierz plony.");                         //
+            System.out.println("10. Wyswietl stan zapasow.");                //
+            System.out.println("11. Opieka nad zwierzetami.");    //
+            System.out.println("12. Opieka nad roslinami. ");    //
+            System.out.println("13. Rozpocznij nowa runde. ");              //
+            System.out.println("14. Zakoncz gre. ");                        //
 
             int gameUserChoice = scanner.nextInt();
 
@@ -262,31 +271,46 @@ public class Main {
                         System.out.println("Wybrano bledne polecenie. Nastapi powrot do menu glownego.");
                     }
                     break;
+                // *** KUPNO/SPRZEDAZ ZWIERZAT *** //
                 case 5:
-//                    // method
+                    // TO DO
                     break;
-//                case 6:
-//                    // method
-//                    break;
-//                case 7:
-//                    // method
-//                    break;
-//                case 8:
-//                    // method
-//                    break;
-//                case 9:
-//                    // method
-//                    break;
-//                case 10:
-//                    // method
-//                    break;
-//                case 11:
-//                    newGame.startNewRound();
-//                    break;
-//                case 12:
-//                    newGame.finishTheGame();
-//                    break;
-
+                // *** POBIERZ WODE ZE STUDNI *** //
+                case 6:
+                    newGame.takeWaterFromWell();
+                    break;
+                // *** KUP NAWOZ *** //
+                case 7:
+                    newGame.buyFertilizer();
+                    break;
+                // *** POSADZ ROSLINY *** //
+                case 8:
+                    Plant.plantAPlant();
+                    break;
+                // *** ZBIERZ PLON *** //
+                case 9:
+                    // TO DO
+                    break;
+                // *** STAN ZAPASOW (SADZONKI/ZIARNO) *** //
+                case 10:
+                    newGame.displaySeedsStatus();
+                    break;
+                // *** OPIEKA ZWIERZAKI *** //
+                case 11:
+                    // TO DO
+                    break;
+                // *** OPIEKA ROSLINY *** //
+                case 12:
+                    // TO DO
+                    break;
+                // *** NOWA RUNDA *** //
+                case 13:
+                    newGame.startNewRound();
+                break;
+                // *** KONIEC GRY *** //
+                case 14:
+                    newGame.finishTheGame();
+                break;
 
             }
         }

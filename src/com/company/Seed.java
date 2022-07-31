@@ -4,44 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+@SuppressWarnings("AccessStaticViaInstance")
 public class Seed implements Buyable, Sellable {
     public String plantName;
     public double seedPrice;
     public int howManySeeds;
-    //public double efficiencyHA;
-    //public double costOfGrowHA;
-    //public double costOfCollect;
+
 
     public Seed(String plantName, double seedPrice, int howManySeeds) {
         this.plantName = plantName;
         this.seedPrice = seedPrice;
         this.howManySeeds = howManySeeds;
-        //this.efficiencyHA = efficiencyHA;
-        //this.costOfGrowHA = costOfGrowHA;
-        //this.costOfCollect = costOfCollect;
     }
 
-//    // metoda do wyswietlania ziarna z parametrami w formie listy
-//    public void displaySeedsInfo() {
-//        System.out.println("Nazwa rosliny: " + plantName);
-//        System.out.println("Cena: " + seedPrice);
-//        // System.out.println("Ilosc: " + howManySeeds);
-//        // System.out.println("Wydajnosc: " + efficiencyHA);
-//        // System.out.println("Koszt wzrostu/tydzien: " + costOfGrowHA);
-//        // System.out.println("Koszt zebrania/HA: " + costOfCollect);
-//    }
-//
-//    // metoda do wyswietlania ziaren z parametrami - lista
-//    public static void displaySeeds() {
-//        for (Seed seed : userSeeds) {
-//            seed.displaySeedsInfo();
-//            System.out.println();
-//        }
-//    }
-
-    // jakies tam randomowe ziarna
-
-
+    // lista do gromadzenia ziarna
+    public static List<Seed> userSeeds = new ArrayList<>();
 
     static Seed Pszenica = new Seed("Pszenica", 100, 0);
     static Seed Owies = new Seed("Owies", 90, 0);
@@ -49,8 +26,14 @@ public class Seed implements Buyable, Sellable {
     static Seed Marchew = new Seed("Marchew", 100, 0);
     static Seed Ziemniak = new Seed("Ziemniak", 90, 0);
 
-    // lista do gromadzenia ziarna
-    public static List<Seed> userSeeds = new ArrayList<>();
+//  tworzymy tablice w ktorej bedziemy zapisywac statusy ziarna, zostanie ona utworzona wraz z nowa gra, w trakcie gry bedzie aktualizowana
+    public static void createListOfSeeds() {
+        userSeeds.add(Pszenica);
+        userSeeds.add(Owies);
+        userSeeds.add(Slonecznik);
+        userSeeds.add(Marchew);
+        userSeeds.add(Ziemniak);
+    }
 
     // skaner
     static Scanner scanner = new Scanner(System.in);
@@ -59,13 +42,6 @@ public class Seed implements Buyable, Sellable {
     public static void buy(gameStatus game) {
         System.out.println("Masz do dyspozycji: " + game.userWallet + "monet.");
         System.out.println("Jesli chcesz kupic sadzonki wybierz 1.");
-
-        // zapelniamy liste userowych roslinek ale w kazdym przypadku ilosc ziaren wynosi zero
-        userSeeds.add(Pszenica);
-        userSeeds.add(Owies);
-        userSeeds.add(Slonecznik);
-        userSeeds.add(Marchew);
-        userSeeds.add(Ziemniak);
 
         int userChoice = scanner.nextInt();
         if (userChoice == 1 && game.userWallet != 0) {
@@ -128,6 +104,8 @@ public class Seed implements Buyable, Sellable {
             }  else System.out.println("Wroc nastepnym razem!");
         }
     }
+
+
 
     // metoda sprzedaży
     public static void sell(gameStatus game){
@@ -202,8 +180,10 @@ public class Seed implements Buyable, Sellable {
         this.howManySeeds = howManySeeds;
     }
 
-//    public static int getHowManySeeds(String plantName) {
-//        return howManySeeds;
-//    }
+    public int getHowManySeeds() {
+        return howManySeeds;
+    }
+
+
 }
 
